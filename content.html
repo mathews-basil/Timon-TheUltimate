@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials - Timon</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fira Code', 'Courier New', monospace;
+    line-height: 1.6;
+    color: #e0e0e0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Animated background particles */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #00ff88, transparent),
+        radial-gradient(2px 2px at 40px 70px, #0088ff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #ff0088, transparent),
+        radial-gradient(1px 1px at 130px 80px, #ff8800, transparent),
+        radial-gradient(2px 2px at 160px 30px, #8800ff, transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: particleMove 20s linear infinite;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+@keyframes particleMove {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-100px); }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navigation */
+.navbar {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0,255,136,0.3);
+    border-bottom: 1px solid #00ff88;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo h2 {
+    color: #00ff88;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px #00ff88;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #00ff88; }
+    to { text-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+}
+
+.nav-logo a {
+    color: #00ff88;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    color: #00ff88;
+    background: rgba(0,255,136,0.1);
+    box-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Fira Code', monospace;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #00ff88, #0088ff);
+    color: #000;
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px rgba(0,255,136,0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,255,136,0.5);
+    background: linear-gradient(45deg, #00ff88, #00ff88);
+}
+
+.btn-secondary {
+    background: linear-gradient(45deg, #ff0088, #8800ff);
+    color: white;
+    border: 2px solid #ff0088;
+    box-shadow: 0 0 20px rgba(255,0,136,0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,0,136,0.5);
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #ff4444, #ff8800);
+    color: white;
+    border: 2px solid #ff4444;
+    box-shadow: 0 0 20px rgba(255,68,68,0.3);
+}
+
+.btn-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,68,68,0.5);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Content Section */
+.content-section {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.content-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #00ff88;
+    text-shadow: 0 0 20px rgba(0,255,136,0.5);
+}
+
+.content-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #00ff88;
+    background: transparent;
+    color: #00ff88;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Fira Code', monospace;
+    font-weight: 500;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: linear-gradient(45deg, #00ff88, #0088ff);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0,255,136,0.3);
+    transform: translateY(-2px);
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.content-card {
+    background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0,255,136,0.2);
+    transition: all 0.3s ease;
+    border: 2px solid #00ff88;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    max-height: 200px;
+}
+
+.content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,255,136,0.1), transparent);
+    transition: left 0.5s;
+}
+
+.content-card:hover::before {
+    left: 100%;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,255,136,0.4);
+    border-color: #0088ff;
+}
+
+.content-card.expanded {
+    max-height: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    z-index: 1000;
+    box-shadow: 0 25px 50px rgba(0,255,136,0.5);
+    border-color: #0088ff;
+    overflow-y: auto;
+}
+
+.content-card.expanded::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: -1;
+    backdrop-filter: blur(5px);
+}
+
+.content-card h3 {
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content-card.expanded h3 {
+    white-space: normal;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-card p {
+    color: #b0b0b0;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.content-card.expanded p {
+    -webkit-line-clamp: unset;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.content-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #00ff88;
+    position: relative;
+    z-index: 2;
+}
+
+.content-type {
+    background: linear-gradient(45deg, #00ff88, #0088ff);
+    color: #000;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    box-shadow: 0 0 10px rgba(0,255,136,0.3);
+}
+
+.content-date {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.code-block {
+    background: #000;
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: 'Fira Code', monospace;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: #00ff88;
+    box-shadow: 0 0 20px rgba(0,255,136,0.2);
+    position: relative;
+    z-index: 2;
+    display: none;
+}
+
+.content-card.expanded .code-block {
+    display: block;
+}
+
+.content-card .code-preview {
+    background: #000;
+    border: 1px solid #00ff88;
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    font-family: 'Fira Code', monospace;
+    color: #00ff88;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2;
+}
+
+.content-card.expanded .code-preview {
+    display: none;
+}
+
+.close-expanded {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: none;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.close-expanded:hover {
+    background: #ff6666;
+    transform: scale(1.1);
+}
+
+.content-card.expanded .close-expanded {
+    display: block;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+    border: 2px solid #00ff88;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0,255,136,0.3);
+}
+
+.admin-modal {
+    max-width: 800px;
+}
+
+.close {
+    color: #00ff88;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    color: #ff0088;
+    transform: scale(1.1);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #00ff88;
+    font-family: 'Fira Code', monospace;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(0,0,0,0.3);
+    color: #e0e0e0;
+    font-family: 'Fira Code', monospace;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #0088ff;
+    box-shadow: 0 0 20px rgba(0,136,255,0.3);
+    background: rgba(0,0,0,0.5);
+}
+
+/* Admin Panel */
+.admin-tabs {
+    display: flex;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #00ff88;
+}
+
+.tab-btn {
+    padding: 1rem 2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #b0b0b0;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    font-family: 'Fira Code', monospace;
+}
+
+.tab-btn.active {
+    color: #00ff88;
+    border-bottom-color: #00ff88;
+    background: rgba(0,255,136,0.1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.content-item {
+    background: linear-gradient(135deg, #2a2a3e 0%, #1a1a2e 100%);
+    border: 2px solid #00ff88;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.content-item:hover {
+    box-shadow: 0 0 20px rgba(0,255,136,0.3);
+    transform: translateY(-2px);
+}
+
+.content-item h4 {
+    margin: 0;
+    color: #e0e0e0;
+}
+
+.content-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-small {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .content-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+    
+    .admin-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: center;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success/Error Messages */
+.message {
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Welcome Section */
+.welcome-section {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    color: #e0e0e0;
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(0,255,136,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,136,255,0.1) 0%, transparent 50%);
+    animation: heroGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #00ff88, #0088ff, #ff0088);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0,255,136,0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-section p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: #b0b0b0;
+    position: relative;
+    z-index: 2;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><h2>Timon</h2></a>
+            </div>
+            <div class="nav-menu">
+                <button id="adminBtn" class="btn btn-secondary" style="display: none;">Admin Panel</button>
+                <button id="logoutBtn" class="btn btn-danger" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="container">
+                <h1>Study Materials</h1>
+                <p>Access programming codes, notes, and educational resources</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section id="content" class="content-section">
+            <div class="container">
+                <h2>Available Materials</h2>
+                <div class="content-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="code">Programming Codes</button>
+                    <button class="filter-btn" data-filter="notes">Notes</button>
+                    <button class="filter-btn" data-filter="files">Files</button>
+                </div>
+                <div id="contentGrid" class="content-grid">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-modal">
+            <span class="close">&times;</span>
+            <h2 style="color: #00ff88; text-align: center; margin-bottom: 1.5rem; font-family: 'Fira Code', monospace;">Admin Panel</h2>
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="add-content">Add Content</button>
+                <button class="tab-btn" data-tab="manage-content">Manage Content</button>
+            </div>
+            
+            <div id="add-content" class="tab-content active">
+                <form id="addContentForm">
+                    <div class="form-group">
+                        <label for="contentType">Content Type:</label>
+                        <select id="contentType" name="contentType" required>
+                            <option value="code">Programming Code</option>
+                            <option value="notes">Study Notes</option>
+                            <option value="files">File Upload</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description" rows="3"></textarea>
+                    </div>
+                    <div class="form-group" id="codeGroup">
+                        <label for="code">Code:</label>
+                        <textarea id="code" name="code" rows="10" placeholder="Enter your code here..."></textarea>
+                    </div>
+                    <div class="form-group" id="fileGroup" style="display: none;">
+                        <label for="file">Upload File:</label>
+                        <input type="file" id="file" name="file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Content</button>
+                </form>
+            </div>
+            
+            <div id="manage-content" class="tab-content">
+                <div id="contentList">
+                    <!-- Content management will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="QC8wPAvMpKGY7asMV9-pB";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+    <script>
+// Global variables
+let currentUser = null;
+let isAdmin = false;
+let allContent = [];
+let authToken = null;
+
+// API Base URL
+const API_BASE = 'http://localhost:3000/api';
+
+// DOM elements
+const adminBtn = document.getElementById('adminBtn');
+const logoutBtn = document.getElementById('logoutBtn');
+const adminModal = document.getElementById('adminModal');
+const contentGrid = document.getElementById('contentGrid');
+const addContentForm = document.getElementById('addContentForm');
+
+// Initialize the application
+document.addEventListener('DOMContentLoaded', function() {
+    checkAuthentication();
+    setupEventListeners();
+    loadContent();
+});
+
+function checkAuthentication() {
+    // Check if user is logged in (from localStorage)
+    const savedUser = localStorage.getItem('currentUser');
+    const savedToken = localStorage.getItem('authToken');
+    
+    if (savedUser && savedToken) {
+        currentUser = JSON.parse(savedUser);
+        authToken = savedToken;
+        isAdmin = currentUser.userType === 'admin';
+        updateUI();
+    } else {
+        // Redirect to home page if not logged in
+        window.location.href = 'index.html';
+    }
+}
+
+function setupEventListeners() {
+    // Admin button
+    adminBtn.addEventListener('click', () => {
+        adminModal.style.display = 'block';
+        loadContentManagement();
+    });
+
+    // Logout button
+    logoutBtn.addEventListener('click', logout);
+
+    // Close modals
+    document.querySelectorAll('.close').forEach(closeBtn => {
+        closeBtn.addEventListener('click', (e) => {
+            e.target.closest('.modal').style.display = 'none';
+        });
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
+        }
+    });
+
+    // Add content form
+    addContentForm.addEventListener('submit', handleAddContent);
+
+    // Content type change
+    document.getElementById('contentType').addEventListener('change', handleContentTypeChange);
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+            filterContent(e.target.dataset.filter);
+        });
+    });
+
+    // Admin tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            e.target.classList.add('active');
+            document.getElementById(e.target.dataset.tab).classList.add('active');
+        });
+    });
+}
+
+function updateUI() {
+    if (currentUser) {
+        logoutBtn.style.display = 'inline-block';
+        if (isAdmin) {
+            adminBtn.style.display = 'inline-block';
+        }
+    }
+}
+
+function logout() {
+    currentUser = null;
+    isAdmin = false;
+    authToken = null;
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('authToken');
+    // Redirect to home page
+    window.location.href = 'index.html';
+}
+
+function handleContentTypeChange() {
+    const contentType = document.getElementById('contentType').value;
+    const codeGroup = document.getElementById('codeGroup');
+    const fileGroup = document.getElementById('fileGroup');
+
+    if (contentType === 'code') {
+        codeGroup.style.display = 'block';
+        fileGroup.style.display = 'none';
+    } else if (contentType === 'files') {
+        codeGroup.style.display = 'none';
+        fileGroup.style.display = 'block';
+    } else {
+        codeGroup.style.display = 'none';
+        fileGroup.style.display = 'none';
+    }
+}
+
+async function handleAddContent(e) {
+    e.preventDefault();
+    const formData = new FormData(addContentForm);
+    const contentType = formData.get('contentType');
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const code = formData.get('code');
+    const file = formData.get('file');
+
+    try {
+        let response;
+        
+        if (contentType === 'files' && file && file.size > 0) {
+            // Handle file upload
+            const uploadFormData = new FormData();
+            uploadFormData.append('title', title);
+            uploadFormData.append('description', description);
+            uploadFormData.append('file', file);
+
+            response = await fetch(`${API_BASE}/content/upload`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: uploadFormData
+            });
+        } else {
+            // Handle code/notes
+            response = await fetch(`${API_BASE}/content`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({
+                    title,
+                    description,
+                    type: contentType,
+                    content: contentType === 'code' ? code : (contentType === 'notes' ? code : null)
+                })
+            });
+        }
+
+        const data = await response.json();
+
+        if (response.ok) {
+            addContentForm.reset();
+            showMessage('Content added successfully!', 'success');
+            loadContent();
+            loadContentManagement();
+        } else {
+            showMessage(data.message || 'Failed to add content', 'error');
+        }
+    } catch (error) {
+        console.error('Error adding content:', error);
+        showMessage('Network error adding content', 'error');
+    }
+}
+
+async function loadContent() {
+    try {
+        const response = await fetch(`${API_BASE}/content`);
+        if (response.ok) {
+            allContent = await response.json();
+            displayContent(allContent);
+        } else {
+            console.error('Failed to load content');
+            showMessage('Failed to load content', 'error');
+        }
+    } catch (error) {
+        console.error('Error loading content:', error);
+        showMessage('Network error loading content', 'error');
+    }
+}
+
+function displayContent(content) {
+    contentGrid.innerHTML = '';
+    
+    if (content.length === 0) {
+        contentGrid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No content available.</p>';
+        return;
+    }
+
+    content.forEach(item => {
+        const contentCard = createContentCard(item);
+        contentGrid.appendChild(contentCard);
+    });
+}
+
+function createContentCard(item) {
+    const card = document.createElement('div');
+    card.className = 'content-card';
+    card.dataset.type = item.type;
+
+    const typeColors = {
+        'code': '#28a745',
+        'notes': '#17a2b8',
+        'files': '#ffc107'
+    };
+
+    const typeIcons = {
+        'code': 'fas fa-code',
+        'notes': 'fas fa-sticky-note',
+        'files': 'fas fa-file'
+    };
+
+    // Create preview content for small cards
+    let previewContent = '';
+    let fullContent = '';
+    
+    if (item.type === 'code' && item.content) {
+        const codePreview = item.content.substring(0, 100) + (item.content.length > 100 ? '...' : '');
+        previewContent = `<div class="code-preview">${escapeHtml(codePreview)}</div>`;
+        fullContent = `<div class="code-block">${escapeHtml(item.content)}</div>`;
+    } else if (item.type === 'notes' && item.content) {
+        const notePreview = item.content.substring(0, 150) + (item.content.length > 150 ? '...' : '');
+        previewContent = `<p><strong>Notes:</strong> ${notePreview}</p>`;
+        fullContent = `<p><strong>Notes:</strong> ${item.content}</p>`;
+    } else if (item.type === 'files') {
+        previewContent = `<p><i class="fas fa-download"></i> <span style="color: #00ff88;">Click to download ${item.fileName}</span></p>`;
+        fullContent = `<p><i class="fas fa-download"></i> <a href="#" onclick="downloadFile('${item._id}')" style="color: #00ff88;">Download ${item.fileName}</a></p>`;
+    }
+
+    card.innerHTML = `
+        <button class="close-expanded">&times;</button>
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        ${previewContent}
+        ${fullContent}
+        <div class="content-meta">
+            <span class="content-type" style="background: ${typeColors[item.type]}">
+                <i class="${typeIcons[item.type]}"></i> ${item.type.charAt(0).toUpperCase() + item.type.slice(1)}
+            </span>
+            <span class="content-date">${new Date(item.createdAt).toLocaleDateString()}</span>
+        </div>
+    `;
+
+    // Add click event for card expansion
+    card.addEventListener('click', (e) => {
+        if (!e.target.classList.contains('close-expanded') && !e.target.closest('a')) {
+            expandCard(card);
+        }
+    });
+
+    // Add close button event
+    const closeBtn = card.querySelector('.close-expanded');
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        collapseCard(card);
+    });
+
+    return card;
+}
+
+function expandCard(card) {
+    // Close any other expanded cards
+    document.querySelectorAll('.content-card.expanded').forEach(expandedCard => {
+        if (expandedCard !== card) {
+            collapseCard(expandedCard);
+        }
+    });
+    
+    card.classList.add('expanded');
+    document.body.style.overflow = 'hidden';
+}
+
+function collapseCard(card) {
+    card.classList.remove('expanded');
+    document.body.style.overflow = 'auto';
+}
+
+// Add click outside to close functionality
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('content-card') && e.target.classList.contains('expanded')) {
+        // Clicked on the expanded card itself, don't close
+        return;
+    }
+    
+    // Check if click is outside any expanded card
+    const expandedCards = document.querySelectorAll('.content-card.expanded');
+    expandedCards.forEach(card => {
+        if (!card.contains(e.target)) {
+            collapseCard(card);
+        }
+    });
+});
+
+// Add escape key to close expanded cards
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.content-card.expanded').forEach(card => {
+            collapseCard(card);
+        });
+    }
+});
+
+function filterContent(filter) {
+    let filteredContent = allContent;
+    
+    if (filter !== 'all') {
+        filteredContent = allContent.filter(item => item.type === filter);
+    }
+    
+    displayContent(filteredContent);
+}
+
+async function loadContentManagement() {
+    const contentList = document.getElementById('contentList');
+    contentList.innerHTML = '';
+
+    try {
+        const response = await fetch(`${API_BASE}/content`);
+        if (response.ok) {
+            const content = await response.json();
+            
+            content.forEach(item => {
+                const contentItem = document.createElement('div');
+                contentItem.className = 'content-item';
+                contentItem.innerHTML = `
+                    <div>
+                        <h4>${item.title}</h4>
+                        <p>Type: ${item.type} | Author: ${item.author} | Date: ${new Date(item.createdAt).toLocaleDateString()}</p>
+                    </div>
+                    <div class="content-actions">
+                        <button class="btn btn-primary btn-small" onclick="editContent('${item._id}')">Edit</button>
+                        <button class="btn btn-danger btn-small" onclick="deleteContent('${item._id}')">Delete</button>
+                    </div>
+                `;
+                contentList.appendChild(contentItem);
+            });
+        }
+    } catch (error) {
+        console.error('Error loading content management:', error);
+    }
+}
+
+async function editContent(id) {
+    try {
+        const response = await fetch(`${API_BASE}/content/${id}`);
+        if (response.ok) {
+            const item = await response.json();
+            
+            // Pre-fill the form with existing data
+            document.getElementById('contentType').value = item.type;
+            document.getElementById('title').value = item.title;
+            document.getElementById('description').value = item.description;
+            if (item.content) {
+                document.getElementById('code').value = item.content;
+            }
+            
+            // Switch to add content tab
+            document.querySelector('[data-tab="add-content"]').click();
+            handleContentTypeChange();
+            
+            // Update form to edit mode
+            addContentForm.dataset.editId = id;
+            addContentForm.querySelector('button[type="submit"]').textContent = 'Update Content';
+        }
+    } catch (error) {
+        console.error('Error loading content for edit:', error);
+        showMessage('Error loading content for editing', 'error');
+    }
+}
+
+async function deleteContent(id) {
+    if (confirm('Are you sure you want to delete this content?')) {
+        try {
+            const response = await fetch(`${API_BASE}/content/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+
+            if (response.ok) {
+                showMessage('Content deleted successfully!', 'success');
+                loadContent();
+                loadContentManagement();
+            } else {
+                const data = await response.json();
+                showMessage(data.message || 'Failed to delete content', 'error');
+            }
+        } catch (error) {
+            console.error('Error deleting content:', error);
+            showMessage('Network error deleting content', 'error');
+        }
+    }
+}
+
+function downloadFile(id) {
+    window.open(`${API_BASE}/download/${id}`, '_blank');
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function showMessage(message, type) {
+    // Remove existing messages
+    const existingMessages = document.querySelectorAll('.message');
+    existingMessages.forEach(msg => msg.remove());
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${type}`;
+    messageDiv.textContent = message;
+    
+    document.body.insertBefore(messageDiv, document.body.firstChild);
+    
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 3000);
+}
+
+// Update the add content form to handle both add and edit
+addContentForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(addContentForm);
+    const contentType = formData.get('contentType');
+    const title = formData.get('title');
+    const description = formData.get('description');
+    const code = formData.get('code');
+    const file = formData.get('file');
+
+    const editId = addContentForm.dataset.editId;
+    
+    if (editId) {
+        // Update existing content
+        try {
+            const response = await fetch(`${API_BASE}/content/${editId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken}`
+                },
+                body: JSON.stringify({
+                    title,
+                    description,
+                    type: contentType,
+                    content: contentType === 'code' ? code : (contentType === 'notes' ? code : null)
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showMessage('Content updated successfully!', 'success');
+                addContentForm.reset();
+                addContentForm.removeAttribute('data-edit-id');
+                addContentForm.querySelector('button[type="submit"]').textContent = 'Add Content';
+                loadContent();
+                loadContentManagement();
+            } else {
+                showMessage(data.message || 'Failed to update content', 'error');
+            }
+        } catch (error) {
+            console.error('Error updating content:', error);
+            showMessage('Network error updating content', 'error');
+        }
+    } else {
+        // Add new content
+        handleAddContent(e);
+    }
+});
+    </script>
+</body>
+</html>
